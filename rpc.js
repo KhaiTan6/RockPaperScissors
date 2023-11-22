@@ -1,13 +1,13 @@
 //console.log("Hello World");
 
-function getComputerChoice(){
+function get_computer_choice(){
     var options = ["rock", "paper", "scissors"]
     var choice = options[Math.floor(Math.random() * options.length)]
     return choice
 }
 
 //Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-function playRound(playerSelection, computerSelection){
+function play_round(playerSelection, computerSelection){
     choice = playerSelection.toLowerCase()
     if (choice == computerSelection){
         return "It's a tie!"
@@ -46,8 +46,8 @@ function game(){
     var roundNum = 1
     for (var i = 0; i < 5; i++){
         var playerSelection = prompt('Round ' + roundNum + ', Enter your choice: Rock, Paper, or Scissors')
-        var computerSelection = getComputerChoice()
-        var result = playRound(playerSelection, computerSelection)
+        var computerSelection = get_computer_choice()
+        var result = play_round(playerSelection, computerSelection)
         console.log(result)
         if (result.includes("win")){
             playerScore += 1
