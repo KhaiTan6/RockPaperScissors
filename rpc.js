@@ -43,8 +43,9 @@ function playRound(playerSelection, computerSelection){
 function game(){
     var playerScore = 0
     var computerScore = 0
+    var roundNum = 1
     for (var i = 0; i < 5; i++){
-        var playerSelection = prompt("Enter your choice: Rock, Paper, or Scissors")
+        var playerSelection = prompt('Round ' + roundNum + ', Enter your choice: Rock, Paper, or Scissors')
         var computerSelection = getComputerChoice()
         var result = playRound(playerSelection, computerSelection)
         console.log(result)
@@ -54,6 +55,7 @@ function game(){
         else if (result.includes("lose")){
             computerScore += 1
         }
+        roundNum += 1
     }
     if (playerScore > computerScore){
         console.log("Final results: You win!")
