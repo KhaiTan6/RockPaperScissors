@@ -44,29 +44,48 @@ function game(){
     var playerScore = 0
     var computerScore = 0
     var roundNum = 1
-    for (var i = 0; i < 5; i++){
-        var playerSelection = prompt('Round ' + roundNum + ', Enter your choice: Rock, Paper, or Scissors')
-        var computerSelection = get_computer_choice()
-        var result = play_round(playerSelection, computerSelection)
-        console.log(result)
-        if (result.includes("win")){
-            playerScore += 1
-        }
-        else if (result.includes("lose")){
-            computerScore += 1
-        }
-        roundNum += 1
-    }
-    if (playerScore > computerScore){
-        console.log("Final results: You win!")
-    }
-    else if (playerScore < computerScore){
-        console.log("Final results: You lose!")
-    }
-    else{
-        console.log("Final results: It's a tie!")
-    }
+    let playerSelection = ""
+    computerSelection = ''
+    // play N rounds of the game
+    //for (var i = 0; i < 5; i++){
+    //var playerSelection = prompt('Round ' + roundNum + ', Enter your choice: Rock, Paper, or Scissors')
+    const btns = document.querySelectorAll('button');
+    btns.forEach(button => {
+        let playerSelection = button.textContent;
+
+        button.addEventListener('click', () =>{
+            console.log(play_round(playerSelection, get_computer_choice()));
+        });
+        button.addEventListener('click', () => {
+            console.log(playerSelection);
+        });
+
+    });
+    //var computerSelection = get_computer_choice()
+    //var result = play_round(playerSelection, computerSelection)
+    //console.log(result)
+    //if (result.includes("win")){
+    //    playerScore += 1
+    //}
+    //else if (result.includes("lose")){
+    //    computerScore += 1
+    //}
+    roundNum += 1
+    //}
+
+    
+    //if (playerScore > computerScore){
+    //    console.log("Final results: You win!")
+    //}
+    //else if (playerScore < computerScore){
+    //    console.log("Final results: You lose!")
+    //}
+    //else{
+    //    console.log("Final results: It's a tie!")
+    //}
 }
+
+
 game();
 //const playerSelection = "rock";
 //const computerSelection = getComputerChoice();
