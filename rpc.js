@@ -1,94 +1,98 @@
-//console.log("Hello World");
+// Initialize scores
+let playerScore = 0;
+let computerScore = 0;
 
 function get_computer_choice(){
-    var options = ["rock", "paper", "scissors"]
-    var choice = options[Math.floor(Math.random() * options.length)]
-    return choice
+    var options = ["rock", "paper", "scissors"];
+    var choice = options[Math.floor(Math.random() * options.length)];
+    return choice;
 }
 
-//Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
+// Function to update and display the scores
+function updateScores() {
+    const scoreDiv = document.getElementById('score');
+    scoreDiv.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+}
+
+// Function to play a single round and update scores and results
 function play_round(playerSelection, computerSelection){
-    choice = playerSelection.toLowerCase()
-    if (choice == computerSelection){
-        return "It's a tie!"
+    playerSelection = playerSelection.toLowerCase();
+    let result;
+    if (playerSelection === computerSelection){
+        result = "It's a tie!";
     }
-    else if (choice == "rock"){
-        if (computerSelection == "paper"){
-            return "You lose! Paper beats Rock"
+    else if (playerSelection === "rock"){
+        if (computerSelection === "paper"){
+            result = "You lose! Paper beats Rock";
+            computerScore++;
         }
         else{
-            return "You win! Rock beats Scissors"
+            result = "You win! Rock beats Scissors";
+            playerScore++;
         }
     }
-    else if (choice == "paper"){
-        if (computerSelection == "rock"){
-            return "You win! Paper beats Rock"
+    else if (playerSelection === "paper"){
+        if (computerSelection === "rock"){
+            result = "You win! Paper beats Rock";
+            playerScore++;
         }
         else{
-            return "You lose! Scissors beats Paper"
+            result = "You lose! Scissors beats Paper";
+            computerScore++;
         }
     }
-    else if (choice == "scissors"){
-        if (computerSelection == "rock"){
-            return "You lose! Rock beats Scissors"
+    else if (playerSelection === "scissors"){
+        if (computerSelection === "rock"){
+            result = "You lose! Rock beats Scissors";
+            computerScore++;
         }
         else{
-            return "You win! Scissors beats Paper"
+            result = "You win! Scissors beats Paper";
+            playerScore++;
         }
     }
     else{
-        return "Invalid input"
+        result = "Invalid input";
+    }
+    
+    // Update scores and results
+    updateScores();
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.textContent = result;
+
+    // Announce winner if one player reaches 5 points
+    if (playerScore === 5) {
+        resultsDiv.textContent += "\nCongratulations! You win the game!";
+        disableButtons();
+    } else if (computerScore === 5) {
+        resultsDiv.textContent += "\nSorry, you lose the game!";
+        disableButtons();
     }
 }
+
+// Function to initiate the game
 function game(){
-    var playerScore = 0
-    var computerScore = 0
-    var roundNum = 1
-    let playerSelection = ""
-    computerSelection = ''
-    // play N rounds of the game
-    //for (var i = 0; i < 5; i++){
-    //var playerSelection = prompt('Round ' + roundNum + ', Enter your choice: Rock, Paper, or Scissors')
-    const btns = document.querySelectorAll('button');
-    btns.forEach(button => {
-        let playerSelection = button.textContent;
+    // Get the buttons for each selection
+    const rockButton = document.getElementById('rock');
+    const paperButton = document.getElementById('paper');
+    const scissorsButton = document.getElementById('scissors');
 
-        button.addEventListener('click', () =>{
-            console.log(play_round(playerSelection, get_computer_choice()));
-        });
-        button.addEventListener('click', () => {
-            console.log(playerSelection);
-        });
-
+    // Add event listeners to each button
+    rockButton.addEventListener('click', function() {
+        play_round("rock", get_computer_choice());
     });
-    //var computerSelection = get_computer_choice()
-    //var result = play_round(playerSelection, computerSelection)
-    //console.log(result)
-    //if (result.includes("win")){
-    //    playerScore += 1
-    //}
-    //else if (result.includes("lose")){
-    //    computerScore += 1
-    //}
-    roundNum += 1
-    //}
 
-    
-    //if (playerScore > computerScore){
-    //    console.log("Final results: You win!")
-    //}
-    //else if (playerScore < computerScore){
-    //    console.log("Final results: You lose!")
-    //}
-    //else{
-    //    console.log("Final results: It's a tie!")
-    //}
+    paperButton.addEventListener('click', function() {
+        play_round("paper", get_computer_choice());
+    });
+
+    scissorsButton.addEventListener('click', function() {
+        play_round("scissors", get_computer_choice());
+    });
+
+    // Update scores initially
+    updateScores();
 }
 
-
+// Call the game function to start the game
 game();
-//const playerSelection = "rock";
-//const computerSelection = getComputerChoice();
-//console.log("Computer chose: " + computerSelection);
-//console.log(playRound(playerSelection, computerSelection));
-
