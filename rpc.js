@@ -8,8 +8,33 @@ function get_computer_choice(){
     return choice;
 }
 
+function disableButtons() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        if (button.id !== 'reset') {
+            button.disabled = true;
+        }
+    });
+}
+
+function enableButtons() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
+}
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    displayScores();
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.textContent = '';
+    enableButtons();
+}
+
 // Function to update and display the scores
-function updateScores() {
+function displayScores() {
     const scoreDiv = document.getElementById('score');
     scoreDiv.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
@@ -56,7 +81,7 @@ function play_round(playerSelection, computerSelection){
     }
     
     // Update scores and results
-    updateScores();
+    displayScores();
     const resultsDiv = document.getElementById('results');
     resultsDiv.textContent = result;
 
@@ -76,6 +101,7 @@ function game(){
     const rockButton = document.getElementById('rock');
     const paperButton = document.getElementById('paper');
     const scissorsButton = document.getElementById('scissors');
+    const resetButton = document.getElementById('reset');
 
     // Add event listeners to each button
     rockButton.addEventListener('click', function() {
@@ -90,8 +116,12 @@ function game(){
         play_round("scissors", get_computer_choice());
     });
 
+    resetButton.addEventListener('click', function() {
+        resetGame();
+    });
+    
     // Update scores initially
-    updateScores();
+    displayScores();
 }
 
 // Call the game function to start the game
